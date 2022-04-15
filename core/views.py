@@ -10,12 +10,14 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
-from .forms import CheckoutForm
 # CouponForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address
 # Payment, Coupon, Refund, 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
+from .forms import SignUpForm
 
 # stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -44,16 +46,18 @@ def Logout(request):
 
 def SignUp(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            user = form.save()
+            user.refresh_from_db()  
+            user.profile.admin = form.cleaned_data.get('admin')
+            user.save()
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-        return render(request, 'home.html')
+            return redirect('/')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'account/signup.html', {'form': form})
 
 class CheckoutView(View):
