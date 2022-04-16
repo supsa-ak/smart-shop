@@ -10,6 +10,7 @@ from .views import (
     Login,
     SignUp,
     Logout,
+    Search,
     # PaymentView,
     # AddCouponView,
     # RequestRefundView
@@ -24,6 +25,8 @@ urlpatterns = [
     path('login/', Login, name='login'),
     path('signup/', SignUp, name='signup'),
     path('logout/', Logout, name='logout'),
+
+    path('search/', Search, name='search'),
 
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('product/<slug>/', ItemDetailView.as_view(), name='product'),

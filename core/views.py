@@ -1,6 +1,7 @@
 import random
 import string
 # import stripe
+from django.db.models import Q
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -232,6 +233,23 @@ class CheckoutView(View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("core:order-summary")
 
+def Search(request):
+    if request.method == 'POST':
+        srch = request.POST['srh']
+        print(srch, '********')
+        if srch:
+            match = Item.objects.filter(Q(description__icontains=srch)|
+                                           Q(title__icontains=srch))
+            if match:
+                n = len(match)
+                # object_list = {'': match}
+                print(match)
+                return render(request, 'search.html', {'object_list':match})
+            else:
+                messages.error(request, 'no result found')
+        else:
+            return HttpResponseRedirect('/search/')
+    return render(request, 'search.html')
 
 # class PaymentView(View):
 #     def get(self, *args, **kwargs):
