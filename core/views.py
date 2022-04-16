@@ -18,7 +18,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .forms import SignUpForm
+from .forms import SignUpForm, CheckoutForm
 
 # stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -60,6 +60,21 @@ def SignUp(request):
     else:
         form = SignUpForm()
     return render(request, 'account/signup.html', {'form': form})
+
+class Shop1(ListView):
+    model = Item
+    paginate_by = 10
+    template_name = "shop1.html"
+
+class Shop2(ListView):
+    model = Item
+    paginate_by = 10
+    template_name = "shop2.html"
+
+class Shop3(ListView):
+    model = Item
+    paginate_by = 10
+    template_name = "shop3.html"
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
@@ -236,14 +251,10 @@ class CheckoutView(View):
 def Search(request):
     if request.method == 'POST':
         srch = request.POST['srh']
-        print(srch, '********')
         if srch:
             match = Item.objects.filter(Q(description__icontains=srch)|
                                            Q(title__icontains=srch))
             if match:
-                n = len(match)
-                # object_list = {'': match}
-                print(match)
                 return render(request, 'search.html', {'object_list':match})
             else:
                 messages.error(request, 'no result found')

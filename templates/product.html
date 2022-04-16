@@ -15,27 +15,49 @@
 
         </div>
         <!--Grid column-->
-
         <!--Grid column-->
         <div class="col-md-6 mb-4">
-
+          
           <!--Content-->
           <div class="p-4">
-
+            
             <div class="mb-3">
               <a href="">
                 <span class="badge purple mr-1">{{ object.get_category_display }}</span>
               </a>
+              <h1>{{object.title}}</h1>
             </div>
 
             <p class="lead">
+              <h3>Shop 1</h3>
               {% if object.discount_price %}
               <span class="mr-1">
-                <del>${{ object.price }}</del>
+                <del>${{ object.price1 }}</del>
               </span>
-              <span>${{ object.discount_price }}</span>
               {% else %}
-              <span>${{ object.price }}</span>
+              <span>${{ object.price1 }}</span>
+              {% endif %}
+            </p>
+
+            <p class="lead">
+              <h3>Shop 2</h3>
+              {% if object.discount_price %}
+              <span class="mr-1">
+                <del>${{ object.price2 }}</del>
+              </span>
+              {% else %}
+              <span>${{ object.price2 }}</span>
+              {% endif %}
+            </p>
+
+            <p class="lead">
+              <h3>Shop 3</h3>
+              {% if object.discount_price %}
+              <span class="mr-1">
+                <del>${{ object.price3 }}</del>
+              </span>
+              {% else %}
+              <span>${{ object.price3 }}</span>
               {% endif %}
             </p>
 

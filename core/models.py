@@ -37,7 +37,9 @@ def update_user_profile(sender, instance, created, **kwargs):
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    price = models.FloatField()
+    price1 = models.FloatField()
+    price2 = models.FloatField()
+    price3 = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
@@ -75,7 +77,7 @@ class OrderItem(models.Model):
         return f"{self.quantity} of {self.item.title}"
 
     def get_total_item_price(self):
-        return self.quantity * self.item.price
+        return self.quantity * (min(self.item.price1, self.item.price2, self.item.price3))
 
     def get_total_discount_item_price(self):
         return self.quantity * self.item.discount_price

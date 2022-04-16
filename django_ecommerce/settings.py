@@ -13,6 +13,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -79,6 +80,44 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Smart Shop Super Admin",
+    "site_header": "Smart Shop Super Admin",
+    "site_brand": "Smart Shop",
+    "site_logo": "../static/img/logo.png",
+    "site_logo_classes": "img-circle",
+    "site_icon": '../static/img/logo.png',
+    "welcome_sign": "Welcome to the Smart Shop Super Admin",
+    "copyright": "Smart Shop",
+    "search_model": "auth.User",
+    "user_avatar": None,
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Smart Shop Website", "url": "http://127.0.0.1:8000/", "new_window": True},
+        {"model": "auth.User"},
+        {"app": "core"},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-book",
+    "related_modal_active": False,
+    "custom_css": None,
+    "custom_js": None,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+    "language_chooser": False,
+}
+
 
 LANGUAGE_CODE = 'en-us'
 
