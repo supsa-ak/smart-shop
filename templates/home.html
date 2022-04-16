@@ -54,7 +54,10 @@
 
             <!--Section: Products v.3-->
             <section class="text-center mb-4">
-
+                {% if chk %}
+                <h1>You are Admin user</h1>
+                <a href="/edit">Go to Edit Section </a>
+                {% endif %}
                 <div class="row wow fadeIn">
 
                     {% for item in object_list %}

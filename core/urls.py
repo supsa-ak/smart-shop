@@ -11,7 +11,7 @@ from .views import (
     SignUp,
     Logout,
     Search,
-    Shops,
+    # Shops,
     Shop1,
     Shop2,
     Shop3,
@@ -24,7 +24,7 @@ app_name = 'core'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('shop/', Shop.as_view(), name='shop'),
+    # path('shop/', Shop.as_view(), name='shop'),
     path('shop1/', Shop1.as_view(), name='shop1'),
     path('shop2/', Shop2.as_view(), name='shop2'),
     path('shop3/', Shop3.as_view()),

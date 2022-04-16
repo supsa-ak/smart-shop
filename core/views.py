@@ -12,7 +12,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
 # CouponForm, RefundForm, PaymentForm
-from .models import Item, OrderItem, Order, Address
+from .models import Item, OrderItem, Order, Address, Profile
 # Payment, Coupon, Refund, 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -401,10 +401,21 @@ def Search(request):
 #         return redirect("/payment/stripe/")
 
 
-class HomeView(ListView):
-    model = Item
-    paginate_by = 10
-    template_name = "home.html"
+class HomeView(ListView, View):
+    # model = Item
+    # paginate_by = 10
+    # template_name = "home.html"
+    def get(self, *args, **kwargs):
+        try:
+            chk = False
+            if self.request.user.is_authenticated:
+                chk = Profile.objects.get(user=self.request.user).admin
+                print(chk)
+            object_list = Item.objects.filter()
+            return render(self.request, 'home.html',  {'object_list':object_list, 'chk': chk})
+        except ObjectDoesNotExist:
+            messages.warning(self.request, "You do not have an active order")
+            return redirect("/")
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
