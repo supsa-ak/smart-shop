@@ -9,9 +9,9 @@ Clone this project in your directory
 git clone https://github.com/supsa-ak/smart-shop.git
 ```
     
-Go to "django_ecommerce" folder
+Go to "smart-shop" folder
 ```bash
-cd \django_ecommerce\
+cd .\smart-shop\
 ```
 
 Create Virtual Environment
@@ -40,9 +40,16 @@ Migrate Database
 python manage.py migrate
 ```
 
+Create Super Admin User
+```bash
+python manage.py createsuperuser
+```
+
 Run Django Project
 ```bash
 python manage.py runserver
 ```
+
+
 
 Development server will start at http://127.0.0.1:8000/
