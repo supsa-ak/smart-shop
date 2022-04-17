@@ -41,8 +41,8 @@ class Item(models.Model):
     price2 = models.FloatField()
     price3 = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2, null=True, blank=True)
+    label = models.CharField(choices=LABEL_CHOICES, max_length=1, null=True, blank=True)
     slug = models.SlugField()
     description = models.TextField()
     image = models.ImageField(upload_to="items", blank=True)
@@ -138,3 +138,7 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = 'Addresses'
+
+# class Shop(models.Model):
+#     name = 
+#     location = 

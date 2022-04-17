@@ -81,7 +81,11 @@
             <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
               Remove from cart
             </a>
-
+            {% if chk %}
+            <a href="{{ object.get_absolute_url }}edit/" class="btn btn-danger btn-md my-0 p">
+              Edit
+            </a>
+            {% endif %}
           </div>
           <!--Content-->
 

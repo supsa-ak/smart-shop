@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Item
 
 class SignUpForm(UserCreationForm):
     admin = forms.BooleanField(help_text='For shop/outlet account')
@@ -50,3 +51,9 @@ class CheckoutForm(forms.Form):
 
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ('title', 'price1', 'price2', 'price3', 'category', 'label', 'slug', 'description', 'image')

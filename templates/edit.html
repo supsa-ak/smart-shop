@@ -22,7 +22,7 @@
                 <!-- Links -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">All
+                        <a class="nav-link" href="#">All
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -53,63 +53,18 @@
 
         </nav>
         <!--/.Navbar-->
+        <h1>Add Product</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit"  class='btn btn-primary'>Submit</button>
+        </form>
+        <a href="delete/">
+            <button  class='btn btn-danger'>Delete</button>
+        </a>
+       
 
-        <!--Section: Products v.3-->
-        <section class="text-center mb-4">
-
-            <div class="row wow fadeIn">
-
-                {% for item in object_list %}
-                <div class="col-lg-3 col-md-6 mb-4">
-
-                    <div class="card">
-
-                        <div class="view overlay">
-                            {% if item.image.url %}
-                            <img src="{{ item.image.url }}" class="card-img-top">
-                            {% else %}
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
-                                class="card-img-top">
-                            {% endif %}
-                            <a href="{{ item.get_absolute_url }}">
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                        </div>
-
-                        <div class="card-body text-center">
-                            <a href="" class="grey-text">
-                                <h5>{{ item.get_category_display }}</h5>
-                            </a>
-                            <h5>
-                                <strong>
-                                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
-                                        <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
-                                    </a>
-                                </strong>
-                            </h5>
-
-                            <h4 class="font-weight-bold blue-text">
-                                <strong>$
-                                    {% if item.discount_price %}
-                                    {{ item.discount_price }}
-                                    {% else %}
-                                    {{ item.price1 }}
-                                    {% endif %}
-                                </strong>
-                            </h4>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                {% endfor %}
-            </div>
-
-        </section>
-        <!--Section: Products v.3-->
-
-        <!--Pagination-->
+        <!--Pagi-->
 
         {% if is_paginated %}
         <nav class="d-flex justify-content-center wow fadeIn">
