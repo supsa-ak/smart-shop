@@ -11,23 +11,18 @@ from .views import (
     SignUp,
     Logout,
     Search,
-    # Shops,
     Edit,
     Shop1,
     Shop2,
     Shop3,
     ItemEdit,
     ItemDelete,
-    # PaymentView,
-    # AddCouponView,
-    # RequestRefundView
 )
 
-app_name = 'core'
+app_name = "core"
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    # path('shop/', Shop.as_view(), name='shop'),
     path('shop1/', Shop1.as_view(), name='shop1'),
     path('shop2/', Shop2.as_view(), name='shop2'),
     path('shop3/', Shop3.as_view()),
@@ -45,18 +40,8 @@ urlpatterns = [
     path('product/<slug>/edit/', ItemEdit, name='editProd'),
     path('product/<slug>/edit/delete/', ItemDelete, name='delProd'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
-    # path('add-coupon/', AddCouponView.as_view(), name='add-coupon'),
     path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart, name='remove-single-item-from-cart'),
-    # path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
-    # path('request-refund/', RequestRefundView.as_view(), name='request-refund')
 ] 
 
 from django.contrib import admin
-# from allauth.socialaccount.models import SocialToken, SocialAccount, SocialApp
-# from django.contrib.sites.models import Site
-
-# admin.site.unregister(Site)
-# admin.site.unregister(SocialToken)
-# admin.site.unregister(SocialAccount)
-# admin.site.unregister(SocialApp)

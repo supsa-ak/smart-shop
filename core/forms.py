@@ -5,10 +5,11 @@ from .models import Item
 
 class SignUpForm(UserCreationForm):
     admin = forms.BooleanField(help_text='For shop/outlet account')
+    location = forms.CharField(help_text='Your Location')
 
     class Meta:
         model = User
-        fields = ('username', 'admin', 'password1', 'password2',)
+        fields = ('username', 'admin', 'location', 'password1', 'password2',)
 
     def __init__(self, *args, **kwargs):
             super(SignUpForm, self).__init__(*args, **kwargs)

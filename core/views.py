@@ -96,8 +96,6 @@ def ItemDelete(request, slug):
     obj.delete()
     return redirect('/')
 
-
-
 def Search(request):
     if request.method == 'POST':
         srch = request.POST['srh']
@@ -122,7 +120,7 @@ def Edit(request):
             if form.is_valid():
                 form.save()
                 img_obj = form.instance
-                return render(request, 'edit.html', {'form': form, 'img_obj': img_obj})
+                return redirect('core:home')
         else:
             form = EditForm()
         return render(request, 'edit.html', {'form': form})
@@ -175,7 +173,6 @@ class CheckoutView(View):
             form = CheckoutForm()
             context = {
                 'form': form,
-                # 'couponform': CouponForm(),
                 'order': order,
                 'DISPLAY_COUPON_FORM': True
             }
@@ -326,11 +323,14 @@ class CheckoutView(View):
 
                 if payment_option == 'S':
                     messages.success(self.request, "Your order was successful!")
+                    obj = get_object_or_404(Order, user = self.request.user)
+                    obj.delete()
                     return redirect("/")
 
-                    # return redirect('core:payment', payment_option='stripe')
                 elif payment_option == 'P':
                     messages.success(self.request, "Your order was successful!")
+                    obj = get_object_or_404(Order, user = self.request.user)
+                    obj.delete()
                     return redirect("/")
                 else:
                     messages.warning(
@@ -352,7 +352,6 @@ def add_to_cart(request, slug):
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
-        # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
@@ -380,7 +379,6 @@ def remove_from_cart(request, slug):
     )
     if order_qs.exists():
         order = order_qs[0]
-        # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item = OrderItem.objects.filter(
                 item=item,
@@ -408,7 +406,6 @@ def remove_single_item_from_cart(request, slug):
     )
     if order_qs.exists():
         order = order_qs[0]
-        # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item = OrderItem.objects.filter(
                 item=item,

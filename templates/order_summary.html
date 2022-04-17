@@ -11,7 +11,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Item title</th>
-            <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Total Item Price</th>
         </tr>
@@ -21,7 +20,6 @@
         <tr>
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ order_item.item.title }}</td>
-            <td>{{ order_item.item.price }}</td>
             <td>
                 <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
                 {{ order_item.quantity }}
@@ -57,7 +55,7 @@
         {% endif %}
         {% if object.get_total %}
         <tr>
-            <td colspan="4"><b>Order Total</b></td>
+            <td colspan="3"><b>Order Total</b></td>
             <td><b>${{ object.get_total }}</b></td>
         </tr>
         <tr>
