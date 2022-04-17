@@ -31,6 +31,8 @@ MANIFEST
 *.manifest
 *.spec
 
+migrations/
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -69,6 +71,8 @@ docs/_build/
 
 # PyBuilder
 target/
+
+
 
 # Jupyter Notebook
 .ipynb_checkpoints
